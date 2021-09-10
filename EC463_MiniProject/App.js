@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -10,49 +10,104 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        {/* Home screen set up */}
         <Stack.Screen
           name = "Home"
+          backgroundColor = '#fff'
           component = {HomeScreen}
-          options = {{title: 'Welcome' }}
+          options = {{title: 'Home' }}
         />
-        <Stack.Screen name="History" component={HistoryScreen} />
+        {/* History screen set up */}
+        <Stack.Screen name="History" component={HistoryScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
+//Home screen UI components
 const HomeScreen = ({ navigation }) => {
   return (
-    <Button
-      title="Go to Jane's history"
-      onPress={() =>
-        navigation.navigate('History', { name: 'Jane' })
-      }
-    />
+    <View style = {styles.container}>
+
+      {/* Title text component */}
+      <Text style = {styles.titleText}>
+        Nutritional Scanner
+      </Text>
+
+      {/* Subheader text component */}
+      <View style = {styles.container}>
+        <Text style = {styles.subtitleText}>
+          A Senior Design Mini Project
+        </Text>
+      </View>
+
+      {/* Button to start scanning items. Navigates to scanning screen */}
+      <Pressable style={styles.Button}>
+        <Text style={styles.buttonText}>
+          Get Started
+        </Text>
+      </Pressable>
+
+      {/* Button to navigate to history screen, shows users 10 most recent scans */}
+      <Pressable 
+        style={styles.Button} 
+        onPress={() => navigation.navigate('History', { name: 'Jane' })}>
+          <Text style={styles.buttonText}>
+            Previous Scans
+          </Text>
+      </Pressable>
+
+    </View>
   );
 };
+
+// History Screen UI components
 const HistoryScreen = ({ navigation, route }) => {
   return <Text>This is {route.params.name}'s history</Text>;
 };
 
 export default App;
 
-/*
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Testing git in vscode</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-*/
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  // Style for title text
+  titleText: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  },
+  
+  // Style for text within buttons
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+
+  // Style for subtitle text
+  subtitleText: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+
+  // Style for buttons
+  Button: {
+    width: 200,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'black',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: 50
+  },
+
+  // Style for containers containing elements
+  container: {
+    marginTop: 50,
+    flex: 1,
+    alignItems: 'center'
   },
 });
