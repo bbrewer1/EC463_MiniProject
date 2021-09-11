@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import * as firebase from 'firebase9';
 import '@firebase/auth';
 import '@firebase/firestore';
 
