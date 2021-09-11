@@ -3,6 +3,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View, Button, Pressable } from 'react-native';
+import camera from './components/camera'
+import info from './components/info'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -17,8 +20,10 @@ const App = () => {
           component = {HomeScreen}
           options = {{title: 'Home' }}
         />
-        {/* History screen set up */}
+        {/* History screen set up */} 
         <Stack.Screen name="History" component={HistoryScreen}/>
+        <Stack.Screen name="Camera" component = {camera}/>
+        <Stack.Screen name="Info" component = {info}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -42,7 +47,8 @@ const HomeScreen = ({ navigation }) => {
       </View>
 
       {/* Button to start scanning items. Navigates to scanning screen */}
-      <Pressable style={styles.Button}>
+      <Pressable style={styles.Button}
+      onPress={() => navigation.navigate('Camera')}>
         <Text style={styles.buttonText}>
           Get Started
         </Text>
@@ -65,6 +71,7 @@ const HomeScreen = ({ navigation }) => {
 const HistoryScreen = ({ navigation, route }) => {
   return <Text>This is {route.params.name}'s history</Text>;
 };
+
 
 export default App;
 
