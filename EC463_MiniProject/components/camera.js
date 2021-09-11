@@ -18,6 +18,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
     setScanned(false);
   }
   const handleBarCodeScanned = ({ type, data }) => {
+    alert('Barcode with type ${type} and data ${data} has been scanned!');
     setScanned(true);
   };
 
