@@ -9,6 +9,7 @@ export default function RegistrationScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const firebase = require('firebase')
 
     const onFooterLinkPress = () => {
         navigation.navigate('Login')
@@ -34,7 +35,7 @@ export default function RegistrationScreen({navigation}) {
                     .doc(uid)
                     .set(data)
                     .then(() => {
-                        navigation.navigate('Home', {user: data})
+                        navigation.navigate('HomeScreen', {user: data})
                     })
                     .catch((error) => {
                         alert(error)

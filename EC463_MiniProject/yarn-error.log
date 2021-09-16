@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\bbrew\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add firebase
+  C:\Program Files\nodejs\node.exe C:\Users\bbrew\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add firebase@8.2.3
 
 PATH: 
-  C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python38\Scripts\;C:\Python38\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\MAVProxy;C:\ProgramData\chocolatey\bin;C:\Program Files\MATLAB\R2020b\bin;C:\Program Files\Git\cmd;C:\HashiCorp\Vagrant\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Users\bbrew\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\bbrew\AppData\Local\Programs\Python\Python37\;C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q2-update\bin;C:\Users\bbrew\AppData\Local\Microsoft\WindowsApps;C:\Users\bbrew\AppData\Local\atom\bin;C:\Users\bbrew\AppData\Local\GitHubDesktop\bin;C:\Users\bbrew\AppData\Local\Microsoft\WindowsApps;C:\Users\bbrew\AppData\Roaming\npm;C:\Users\bbrew\AppData\Local\Programs\Microsoft VS Code\bin
+  C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python38\Scripts\;C:\Python38\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\MAVProxy;C:\ProgramData\chocolatey\bin;C:\Program Files\MATLAB\R2020b\bin;C:\Program Files\Git\cmd;C:\HashiCorp\Vagrant\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Users\bbrew\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\bbrew\AppData\Local\Programs\Python\Python37\;C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q2-update\bin;C:\Users\bbrew\AppData\Local\Microsoft\WindowsApps;C:\Users\bbrew\AppData\Local\atom\bin;C:\Users\bbrew\AppData\Local\GitHubDesktop\bin;C:\Users\bbrew\AppData\Local\Microsoft\WindowsApps;C:\Users\bbrew\AppData\Roaming\npm;C:\Users\bbrew\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\bbrew\.dotnet\tools
 
 Yarn version: 
   1.22.11
@@ -14,8 +14,8 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@firebase: Request "https://registry.yarnpkg.com/@firebase" returned a 405
-      at Request.params.callback [as _callback] (C:\Users\bbrew\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67001:18)
+  Error: https://registry.yarnpkg.com/firebase9: Not found
+      at Request.params.callback [as _callback] (C:\Users\bbrew\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66992:18)
       at Request.self.callback (C:\Users\bbrew\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140763:22)
       at Request.emit (events.js:400:28)
       at Request.<anonymous> (C:\Users\bbrew\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141735:10)
@@ -45,7 +45,8 @@ npm manifest:
       "expo": "~42.0.1",
       "expo-barcode-scanner": "~10.2.2",
       "expo-status-bar": "~1.0.4",
-      "@firebase": "^9.0.2",
+      "firebase": "^9.0.2",
+      "firebase9": "^9.0.2",
       "react": "16.13.1",
       "react-dom": "16.13.1",
       "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",

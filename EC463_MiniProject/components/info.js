@@ -11,11 +11,13 @@ import {
 } from 'react-native';
 
 const info = ({navigation}) => {
+  const nutritionInfo = this.props.navigation.getParam('nutritionInfo', 'Error: Nothing sent')
   const [number, onChangeNumber] = useState(null);
   const [calories, setCalories] = useState(0);
   useEffect(() => {
     setCalories(500*number);
   },[number]);
+  console.log("Testing info navigation: " + nutritionInfo);
   return (
     <View style={[styles.container, {
       flexDirection: "column",
