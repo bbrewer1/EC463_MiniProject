@@ -10,19 +10,18 @@ import styles from './styles';
 
 export default function HistoryScreen() {
     const {mealdata} = useContext(Context);
-    const historydata = mealdata.reverse();
     const rendermeal = ({item, index}) => {
         return (
             <View style={styles.entityContainer}>
                 <Text style={styles.entityText}>
-                {'\u25CF'} {item.servings} of {item.Food}:  {item.servings*item.Calories} Cal
+                {'\u25CF'} {item.servings} {item.Food}:  {item.servings*item.Calories} Cal
                 </Text>
             </View>
         )
     }
     return (<FlatList
-    data={historydata}
+    data={mealdata}
     renderItem={rendermeal}
-    keyExtractor={item => item.id.toString()}
+    keyExtractor={item => item.id}
     />);
 }

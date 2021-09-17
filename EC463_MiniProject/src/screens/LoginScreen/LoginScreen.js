@@ -22,12 +22,25 @@ export default function LoginScreen({navigation}) {
             .then((response) => {
                 const uid = response.user.uid
                 const usersRef = firebase.firestore().collection('users')
+                const MealsRef = firebase.firestore().collection('users').doc(uid).collection('Meals')
+                MealsRef
+                    .get()
+                    .then(result => {
+                        let Meals=[]
+                        result.docs.forEach(docs=>{
+                            Meals.push(docs.data())
+                        })
+                        actions({type:'setMeal', payload: Meals})
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    });
                 usersRef
                     .doc(uid)
                     .get()
                     .then(firestoreDocument => {
                         if (!firestoreDocument.exists) {
-                            alert("User does not exist anymore.")
+                            alert("User does not exist")
                             return;
                         }
                         const user = firestoreDocument.data()

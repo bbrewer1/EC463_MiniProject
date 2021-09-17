@@ -11,7 +11,7 @@ import {Context} from './context'
   const [scanned, setScanned] = useState(false);
   const {mealdata, actions} = useContext(Context);
 
-  const getInfo = (foodName) => {
+  const getInfobyName = (foodName) => {
     fetch('https://api.nal.usda.gov/fdc/v1/foods/search?api_key=E9600OWz1JligXmYNXwZrVfcKSVbgswSBCPlOTyx&query='+foodName)
     .then( response => response.json())
     .then( result => { 
@@ -30,6 +30,15 @@ import {Context} from './context'
       console.log(mealdata)
     })
     .catch(error=>{console.log(error)})
+  }
+
+  async function getInfobyID(foodID) {
+    const response = await fetch('https://api.nal.usda.gov/fdc/v1/food/'+foodID+'?api_key=E9600OWz1JligXmYNXwZrVfcKSVbgswSBCPlOTyx');
+    const data = await response.json();
+    var name = data["description"];
+    var calories = data["labelNutrients"]["calories"]["value"]
+  
+    return [name, calories];
   }
 
   useEffect(() => {
@@ -56,7 +65,9 @@ import {Context} from './context'
           style: 'cancel',
       },
   ]);
-  var foodInfo = getInfo(data);
+  getInfobyName(data);
+  //let foodinfo = getInfobyID(data);
+  //console.log(foodinfo);
   };
 
   if (hasPermission === null) {

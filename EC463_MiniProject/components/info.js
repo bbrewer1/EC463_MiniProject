@@ -9,26 +9,32 @@ import {
   Button,
 } from 'react-native';
 import { StackActions } from '@react-navigation/native';
-import {Context} from './context'
+import {Context} from './context' 
+import firebase from 'firebase';
 
 const info = ({navigation}) => {
   const [servings, onChangeServings] = useState(1);
   const [calories, setCalories] = useState(null);
-  const {mealdata,actions} = useContext(Context);
-  const [historyFood, setHistoryFood] = useState(null);
-  const [currentfood, setCurrentfood] = useState(mealdata[mealdata.length - 1]); 
-  useEffect(() => {
-    console.log(mealdata)
-    setHistoryFood(mealdata.slice(0,mealdata.length - 2))
-  }, [])
+  const {userdata,mealdata,actions} = useContext(Context);
+  var currentfood = mealdata[mealdata.length - 1]
+
   useEffect(() => {
     setCalories(servings*currentfood.Calories);
-    setCurrentfood({...currentfood, servings: servings});
-    console.log(currentfood);
   },[servings]);
+
   const setMeal = () =>{
-    actions({type:'setMeal', 
-      payload: [...historyFood,currentfood]})
+    const MealsRef = firebase.firestore().collection('users').doc(userdata.id).collection('Meals')
+    let newMealdata = [...mealdata];
+    newMealdata[mealdata.length - 1].servings = servings;
+      MealsRef
+          .add(newMealdata[mealdata.length - 1])
+          .then(() => {
+            actions({type:'setMeal', 
+            payload: newMealdata})
+          })
+          .catch((error) => {
+              alert(error)
+          });
   }
   return (
     <View style={[styles.container, {
