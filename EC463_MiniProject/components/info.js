@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import {
   StyleSheet,
@@ -7,17 +7,18 @@ import {
   View,
   TextInput,
   Button,
-  Alert,
 } from 'react-native';
+import { StackActions } from '@react-navigation/native';
+import {Context} from './context'
 
 const info = ({navigation}) => {
-  const nutritionInfo = this.props.navigation.getParam('nutritionInfo', 'Error: Nothing sent')
-  const [number, onChangeNumber] = useState(null);
-  const [calories, setCalories] = useState(0);
+  const [number, onChangeNumber] = useState(1);
+  const [calories, setCalories] = useState(null);
+  const {mealdata} = useContext(Context);
+  const currentfood = mealdata[mealdata.length - 1]
   useEffect(() => {
-    setCalories(500*number);
+    setCalories(number*currentfood.Calories);
   },[number]);
-  console.log("Testing info navigation: " + nutritionInfo);
   return (
     <View style={[styles.container, {
       flexDirection: "column",
@@ -30,18 +31,19 @@ const info = ({navigation}) => {
         style={styles.input}
         onChangeText={onChangeNumber}
         value={number}
-        placeholder="0"
+        placeholder= '1'
         keyboardType="numeric"
         placeholderTextColor="white"
+        returnKeyType= 'done' 
       />
       </View>
-      <View style={{ flex: 2,}}><Text style={{fontSize: 20, color:'white'}}> {calories} Cal</Text></View>
+      <View style={{ flex: 2,}}><Text style={{fontSize: 20, color:'white'}}> {currentfood.Food}: {calories} Cal</Text></View>
       <View style={{ flex: 1, width : 120 }}>
       <Button
         title="Scan More"
         color="white"
         width = "120"
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.dispatch(StackActions.replace('Camera'))}
       />
       </View>
       <View style={{ flex: 1, width : 120 }}>
@@ -49,7 +51,7 @@ const info = ({navigation}) => {
         title="Finish"
         color="white"
         width = "120"
-        onPress={() => navigation.popToTop()}
+        onPress={() => navigation.dispatch(StackActions.replace('HomeScreen'))}
       />
       </View>
     </View>

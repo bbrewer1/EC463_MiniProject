@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
-import { firebase } from '../../firebase/config'
+import { Context } from '../../../components/context'
+
 
 export default function LoginScreen({navigation}) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const firebase = require('firebase')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const {userdata, mealdata, actions} = useContext(Context);
+    const firebase = require('firebase');
 
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
@@ -29,7 +31,8 @@ export default function LoginScreen({navigation}) {
                             return;
                         }
                         const user = firestoreDocument.data()
-                        navigation.navigate('HomeScreen', {user})
+                        actions({type:'setUser', payload: user})
+                        navigation.navigate('HomeScreen')
                     })
                     .catch(error => {
                         alert(error)

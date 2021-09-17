@@ -1,9 +1,28 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View, Button, Pressable } from 'react-native';
+import { Context } from '../../../components/context'
+import {
+    FlatList,
+    Text,
+    View,
+  } from 'react-native';
+import { useContext } from 'react';
 import styles from './styles';
 
-export default function HistoryScreen(props) {
-    return <Text>This is {route.params.name}'s history</Text>;
+export default function HistoryScreen() {
+    const {mealdata} = useContext(Context);
+    const historydata = mealdata.reverse();
+    const rendermeal = ({item, index}) => {
+        return (
+            <View style={styles.entityContainer}>
+                <Text style={styles.entityText}>
+                 {index}. {item.Food}:  {item.Calories} Cal
+                </Text>
+            </View>
+        )
+    }
+    return (<FlatList
+    data={historydata}
+    renderItem={rendermeal}
+    keyExtractor={item => item.id}
+    />);
 }
