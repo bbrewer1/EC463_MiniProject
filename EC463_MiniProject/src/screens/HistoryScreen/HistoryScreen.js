@@ -15,7 +15,7 @@ export default function HistoryScreen() {
         return (
             <View style={styles.entityContainer}>
                 <Text style={styles.entityText}>
-                 {index}. {item.Food}:  {item.Calories} Cal
+                {'\u25CF'} {item.servings} of {item.Food}:  {item.servings*item.Calories} Cal
                 </Text>
             </View>
         )
@@ -23,6 +23,6 @@ export default function HistoryScreen() {
     return (<FlatList
     data={historydata}
     renderItem={rendermeal}
-    keyExtractor={item => item.id}
+    keyExtractor={item => item.id.toString()}
     />);
 }

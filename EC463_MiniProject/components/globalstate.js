@@ -11,6 +11,8 @@ export const GlobalUserState = () => {
             case 'setUser':
             return setUserdata(payload);
             case 'setMeal':
+            return setMealdata(payload);
+            case 'appendMeal':
             return setMealdata([...mealdata, payload]);
             default:
             return userdata;

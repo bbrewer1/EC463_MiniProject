@@ -12,13 +12,24 @@ import { StackActions } from '@react-navigation/native';
 import {Context} from './context'
 
 const info = ({navigation}) => {
-  const [number, onChangeNumber] = useState(1);
+  const [servings, onChangeServings] = useState(1);
   const [calories, setCalories] = useState(null);
-  const {mealdata} = useContext(Context);
-  const currentfood = mealdata[mealdata.length - 1]
+  const {mealdata,actions} = useContext(Context);
+  const [historyFood, setHistoryFood] = useState(null);
+  const [currentfood, setCurrentfood] = useState(mealdata[mealdata.length - 1]); 
   useEffect(() => {
-    setCalories(number*currentfood.Calories);
-  },[number]);
+    console.log(mealdata)
+    setHistoryFood(mealdata.slice(0,mealdata.length - 2))
+  }, [])
+  useEffect(() => {
+    setCalories(servings*currentfood.Calories);
+    setCurrentfood({...currentfood, servings: servings});
+    console.log(currentfood);
+  },[servings]);
+  const setMeal = () =>{
+    actions({type:'setMeal', 
+      payload: [...historyFood,currentfood]})
+  }
   return (
     <View style={[styles.container, {
       flexDirection: "column",
@@ -29,8 +40,8 @@ const info = ({navigation}) => {
       <View style={{ flex: 2,}}>      
       <TextInput
         style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
+        onChangeText={onChangeServings}
+        value={servings+''}
         placeholder= '1'
         keyboardType="numeric"
         placeholderTextColor="white"
@@ -43,7 +54,10 @@ const info = ({navigation}) => {
         title="Scan More"
         color="white"
         width = "120"
-        onPress={() => navigation.dispatch(StackActions.replace('Camera'))}
+        onPress={() => {
+          navigation.dispatch(StackActions.replace('Camera'));
+          setMeal();
+        }}
       />
       </View>
       <View style={{ flex: 1, width : 120 }}>
@@ -51,7 +65,10 @@ const info = ({navigation}) => {
         title="Finish"
         color="white"
         width = "120"
-        onPress={() => navigation.dispatch(StackActions.replace('HomeScreen'))}
+        onPress={() => {
+          navigation.dispatch(StackActions.replace('HomeScreen'));
+          setMeal();
+        }}
       />
       </View>
     </View>

@@ -18,10 +18,12 @@ import {Context} from './context'
       result.foods[0].foodNutrients.forEach((element) => {
       if (element.nutrientNumber == "208"){
       /*console.log(element.nutrientName+': '+ element.value + ' ' + element.unitName)*/
-      actions({type:'setMeal', 
+      actions({type:'appendMeal', 
       payload: {
+        id:mealdata.length,
         Calories:element.value,
         Food:foodName,
+        servings: 1,
       }})  
       }
       });
