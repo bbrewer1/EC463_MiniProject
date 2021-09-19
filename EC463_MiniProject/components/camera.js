@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StackActions } from '@react-navigation/native';
 import {Context} from './context'
+import { installReactHook } from 'react-native/Libraries/Performance/Systrace';
 
 
 
@@ -28,7 +29,7 @@ import {Context} from './context'
       }
       });
     })
-    .catch(error=>{console.log(error)})
+    .catch(error=>{console.log(error)});
   }
 
   async function getInfobyID(foodID) {
@@ -36,8 +37,13 @@ import {Context} from './context'
     const data = await response.json();
     var name = data["description"];
     var calories = data["labelNutrients"]["calories"]["value"]
-  
-    return [name, calories];
+    actions({type:'appendMeal', 
+    payload: {
+      id:mealdata.length,
+      Calories:calories,
+      Food:name,
+      servings: 1,
+    }})  
   }
 
   useEffect(() => {
@@ -48,7 +54,7 @@ import {Context} from './context'
   }, []);
 
   const FinishScan = () => {
-    setScanned(false)
+    setScanned(false);
     navigation.dispatch(StackActions.replace('Info'));
   }
   const handleBarCodeScanned = ({ type, data }) => {
@@ -64,9 +70,12 @@ import {Context} from './context'
           style: 'cancel',
       },
   ]);
-  getInfobyName(data);
-  //let foodinfo = getInfobyID(data);
-  //console.log(foodinfo);
+  if (isNaN(data)){
+    getInfobyName(data);
+  }
+  else {
+  getInfobyID(data);
+  }
   };
 
   if (hasPermission === null) {

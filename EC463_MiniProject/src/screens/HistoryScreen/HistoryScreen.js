@@ -40,6 +40,6 @@ export default function HistoryScreen() {
     return (<FlatList
     data={mealdata}
     renderItem={rendermeal}
-    keyExtractor={item => item.id}
+    keyExtractor={item => item.id.toString()}
     />);
 }
