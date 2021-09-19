@@ -22,12 +22,28 @@ const info = ({navigation}) => {
     setCalories(servings*currentfood.Calories);
   },[servings]);
 
+  const AutoId = () => {
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  
+    let autoId = ''
+  
+    for (let i = 0; i < 20; i++) {
+      autoId += CHARS.charAt(
+        Math.floor(Math.random() * CHARS.length)
+      )
+    }
+    return autoId
+  }
+
   const setMeal = () =>{
     const MealsRef = firebase.firestore().collection('users').doc(userdata.id).collection('Meals')
+    let Autoid = AutoId();
     let newMealdata = [...mealdata];
     newMealdata[mealdata.length - 1].servings = servings;
+    newMealdata[mealdata.length - 1].docId = Autoid;
       MealsRef
-          .add(newMealdata[mealdata.length - 1])
+          .doc(Autoid)
+          .set(newMealdata[mealdata.length - 1])
           .then(() => {
             actions({type:'setMeal', 
             payload: newMealdata})

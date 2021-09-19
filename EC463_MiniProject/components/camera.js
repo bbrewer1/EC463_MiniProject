@@ -27,7 +27,6 @@ import {Context} from './context'
       }})  
       }
       });
-      console.log(mealdata)
     })
     .catch(error=>{console.log(error)})
   }
