@@ -58,15 +58,15 @@ Here the user can view all their previous scans, including the name, number of s
 <br/>
 
 ### Authorization
-<img src = "./images/firebase_auth.png">
+<img src = "./images/firebase_auth.png" width='600'>
 
 Users are created with their email and stored using the Google Firebase Authentication feature
 
 <br/>
 
 ### Data Storage
-<img src = "./images/firestore1.png">
-<img src = "./images/firestore2.png">
+<img src = "./images/firestore1.png" width='600'>
+<img src = "./images/firestore2.png" width='600'>
 
 Users scanned meals are saved in the Firestore database. They're organized through a collection of their meals, which contains documents for each scan they've performed. In these documents there are 5 fields of information:
 - Calories (calories per serving)
