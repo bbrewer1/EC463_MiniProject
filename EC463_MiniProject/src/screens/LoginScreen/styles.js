@@ -6,7 +6,15 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-
+        flex: 1,
+        marginLeft:30,
+        marginRight:30,
+        marginTop: 20,
+        marginBottom: 20,
+        fontWeight: 'bold',
+        color: 'black',
+        textAlign: 'center',
+        fontSize: 24,
     },
     logo: {
         flex: 1,
